@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    
+    <div class="chatbot">
+        <div class="headder">
+        <br><h2>Chatbot</h2><br>
+        </div>
+        <ul class="chatbox" id="chatbox">
+            <ul class="incoming">
+                <p>Hi there 👋<br>How can I help you today?</p>
+            </ul>
+        </ul>
+        
+        <div class="chat-input">
+            <textarea id="msg" placeholder="Enter a message..." required></textarea>
+            <button id="send-btn" type="submit" onclick="send()">send</button>
+        </div>
+    </div>
+
+    <script>
+        function send(){
+            var txt = document.getElementById("msg").value;
+            if (txt.trim() === "") 
+                return;
+
+            var chatbox = document.getElementById("chatbox");
+
+            var user = document.createElement("ul");
+            user.className = "outgoing";
+            user.innerHTML = "<p>" + txt + "</p>";
+            chatbox.appendChild(user);
+
+            setTimeout(function(){
+                var bot = document.createElement("ul");
+                bot.className = "incoming";
+                bot.innerHTML = "<p>" + txt + "</p>";
+                chatbox.appendChild(bot);
+            },1000);
+
+            chatbox.scrollTop = chatbox.scrollHeight;
+            document.getElementById("msg").value = "";
+        }
+        document.getElementById("msg").addEventListener("keydown", function(event) {
+            if (event.key === "Enter" && !event.shiftKey) {
+                event.preventDefault();
+                send();
+            }
+        });
+    </script>
+</body>
+</html>
