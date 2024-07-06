@@ -13,7 +13,7 @@
         <br><h2>Chatbot</h2><br>
         </div>
         <ul class="chatbox" id="chatbox">
-            <ul class="incoming">
+            <ul class="welcome">
                 <p>Hi there 👋<br>How can I help you today?</p>
             </ul>
         </ul>
@@ -34,17 +34,18 @@
 
             var user = document.createElement("ul");
             user.className = "outgoing";
-            user.innerHTML = "<p>" + txt + "</p>";
+            user.innerHTML = "<p>" + txt.trim() + "</p>";
             chatbox.appendChild(user);
+            chatbox.scrollTo(0, chatbox.scrollHeight);
 
             setTimeout(function(){
                 var bot = document.createElement("ul");
                 bot.className = "incoming";
-                bot.innerHTML = "<p>" + txt + "</p>";
+                bot.innerHTML = "<p>" + txt.trim() + "</p>";
                 chatbox.appendChild(bot);
+                chatbox.scrollTo(0, chatbox.scrollHeight);
             },1000);
 
-            chatbox.scrollTop = chatbox.scrollHeight;
             document.getElementById("msg").value = "";
         }
         document.getElementById("msg").addEventListener("keydown", function(event) {
